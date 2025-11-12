@@ -9,10 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllers();
 
-// Configuração do DbContext com MySQL
+// Configuração do DbContext com Oracle
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+    options.UseOracle(connectionString));
 
 // Injeção de Dependência - Repositories
 builder.Services.AddScoped<IUsuarioRepository, UsuarioRepository>();

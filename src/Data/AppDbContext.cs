@@ -19,6 +19,57 @@ public class AppDbContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        // Mapeamento para tabelas Oracle com prefixo TRILHAS_
+        modelBuilder.Entity<Usuario>(entity =>
+        {
+            entity.ToTable("TRILHAS_USUARIOS");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Nome).HasColumnName("NOME");
+            entity.Property(e => e.Email).HasColumnName("EMAIL");
+            entity.Property(e => e.AreaAtuacao).HasColumnName("AREA_ATUACAO");
+            entity.Property(e => e.NivelCarreira).HasColumnName("NIVEL_CARREIRA");
+            entity.Property(e => e.DataCadastro).HasColumnName("DATA_CADASTRO");
+            entity.HasIndex(u => u.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<Trilha>(entity =>
+        {
+            entity.ToTable("TRILHAS_TRILHAS");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Nome).HasColumnName("NOME");
+            entity.Property(e => e.Descricao).HasColumnName("DESCRICAO");
+            entity.Property(e => e.Nivel).HasColumnName("NIVEL");
+            entity.Property(e => e.CargaHoraria).HasColumnName("CARGA_HORARIA");
+            entity.Property(e => e.FocoPrincipal).HasColumnName("FOCO_PRINCIPAL");
+        });
+
+        modelBuilder.Entity<Competencia>(entity =>
+        {
+            entity.ToTable("TRILHAS_COMPETENCIAS");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Nome).HasColumnName("NOME");
+            entity.Property(e => e.Categoria).HasColumnName("CATEGORIA");
+            entity.Property(e => e.Descricao).HasColumnName("DESCRICAO");
+        });
+
+        modelBuilder.Entity<Matricula>(entity =>
+        {
+            entity.ToTable("TRILHAS_MATRICULAS");
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.UsuarioId).HasColumnName("USUARIO_ID");
+            entity.Property(e => e.TrilhaId).HasColumnName("TRILHA_ID");
+            entity.Property(e => e.DataInscricao).HasColumnName("DATA_INSCRICAO");
+            entity.Property(e => e.Status).HasColumnName("STATUS");
+        });
+
+        modelBuilder.Entity<TrilhaCompetencia>(entity =>
+        {
+            entity.ToTable("TRILHAS_TRILHA_COMPETENCIA");
+            entity.HasKey(tc => new { tc.TrilhaId, tc.CompetenciaId });
+            entity.Property(e => e.TrilhaId).HasColumnName("TRILHA_ID");
+            entity.Property(e => e.CompetenciaId).HasColumnName("COMPETENCIA_ID");
+        });
+
         // Configuração da chave composta para TrilhaCompetencia
         modelBuilder.Entity<TrilhaCompetencia>()
             .HasKey(tc => new { tc.TrilhaId, tc.CompetenciaId });
