@@ -48,7 +48,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(c =>
     {
         c.SwaggerEndpoint("/swagger/v1/swagger.json", "API Plataforma de Upskilling/Reskilling v1");
-        c.RoutePrefix = string.Empty; // Swagger na raiz
+        c.RoutePrefix = "api-docs"; // Swagger em /api-docs
     });
 }
 
@@ -57,8 +57,32 @@ app.UseMiddleware<ExceptionHandlingMiddleware>();
 
 app.UseHttpsRedirection();
 
+// Serve static files from the static folder
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "static")),
+    RequestPath = "/static"
+});
+
+app.UseDefaultFiles(new DefaultFilesOptions
+{
+    DefaultFileNames = new List<string> { "index.html" },
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "static"))
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new Microsoft.Extensions.FileProviders.PhysicalFileProvider(
+        Path.Combine(builder.Environment.ContentRootPath, "static"))
+});
+
 app.UseAuthorization();
 
 app.MapControllers();
+
+// Fallback to index.html for SPA routing
+app.MapFallbackToFile("static/index.html");
 
 app.Run();

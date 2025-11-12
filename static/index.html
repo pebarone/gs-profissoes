@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sistema de Gerenciamento de Trilhas e Usuários">
+    <title>GS SOA - Trilhas & Usuários</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav-brand">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                        <path d="M2 17l10 5 10-5"/>
+                        <path d="M2 12l10 5 10-5"/>
+                    </svg>
+                    <span class="nav-brand-text">GS SOA</span>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#" data-page="home" class="nav-link active">Início</a></li>
+                    <li><a href="#" data-page="usuarios" class="nav-link">Usuários</a></li>
+                    <li><a href="#" data-page="trilhas" class="nav-link">Trilhas</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+        <!-- Home Page -->
+        <section id="home-page" class="page active">
+            <div class="hero">
+                <div class="container">
+                    <h1 class="hero-title">Gerencie suas Trilhas com Elegância</h1>
+                    <p class="hero-subtitle">Uma plataforma moderna para organizar usuários e trilhas de aprendizado</p>
+                    <div class="hero-actions">
+                        <button class="btn btn-primary" data-action="goto-usuarios">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                                <circle cx="9" cy="7" r="4"/>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                            </svg>
+                            Ver Usuários
+                        </button>
+                        <button class="btn btn-secondary" data-action="goto-trilhas">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                            </svg>
+                            Ver Trilhas
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <h3>Rápido e Eficiente</h3>
+                        <p>Interface otimizada para máxima performance e produtividade</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            </svg>
+                        </div>
+                        <h3>Seguro e Confiável</h3>
+                        <p>Dados protegidos com as melhores práticas de segurança</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                                <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
+                                <line x1="12" y1="22.08" x2="12" y2="12"/>
+                            </svg>
+                        </div>
+                        <h3>Moderna e Intuitiva</h3>
+                        <p>Design minimalista inspirado nas melhores práticas de UX</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Usuarios Page -->
+        <section id="usuarios-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Usuários</h1>
+                        <p class="page-description">Gerencie todos os usuários do sistema</p>
+                    </div>
+                    <button class="btn btn-primary" data-action="new-usuario">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Novo Usuário
+                    </button>
+                </div>
+
+                <div class="search-bar">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="search-usuarios" class="search-input" placeholder="Buscar usuários...">
+                </div>
+
+                <div id="usuarios-grid" class="cards-grid"></div>
+            </div>
+        </section>
+
+        <!-- Trilhas Page -->
+        <section id="trilhas-page" class="page">
+            <div class="container">
+                <div class="page-header">
+                    <div>
+                        <h1 class="page-title">Trilhas</h1>
+                        <p class="page-description">Explore e gerencie trilhas de aprendizado</p>
+                    </div>
+                    <button class="btn btn-primary" data-action="new-trilha">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="12" y1="5" x2="12" y2="19"/>
+                            <line x1="5" y1="12" x2="19" y2="12"/>
+                        </svg>
+                        Nova Trilha
+                    </button>
+                </div>
+
+                <div class="search-bar">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input type="text" id="search-trilhas" class="search-input" placeholder="Buscar trilhas...">
+                </div>
+
+                <div id="trilhas-grid" class="cards-grid"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal Container -->
+    <div id="modal-container"></div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/static/js/api.js"></script>
+    <script src="/static/js/components.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
