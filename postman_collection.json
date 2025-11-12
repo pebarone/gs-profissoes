@@ -1,0 +1,182 @@
+{
+  "info": {
+    "name": "API Plataforma Upskilling/Reskilling",
+    "description": "Coleção de requisições para testar a API da Global Solution 2025",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Usuários",
+      "item": [
+        {
+          "name": "Listar todos os usuários",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Buscar usuário por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar novo usuário",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva\",\n  \"email\": \"joao.silva@email.com\",\n  \"areaAtuacao\": \"Tecnologia da Informação\",\n  \"nivelCarreira\": \"Pleno\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar usuário",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"João Silva Atualizado\",\n  \"email\": \"joao.silva@email.com\",\n  \"areaAtuacao\": \"Tecnologia da Informação\",\n  \"nivelCarreira\": \"Senior\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar usuário",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/usuarios/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "usuarios", "1"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Trilhas",
+      "item": [
+        {
+          "name": "Listar todas as trilhas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/trilhas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trilhas"]
+            }
+          }
+        },
+        {
+          "name": "Buscar trilha por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/trilhas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trilhas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Criar nova trilha",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Python para Data Science\",\n  \"descricao\": \"Aprenda Python aplicado à análise de dados\",\n  \"nivel\": \"INTERMEDIARIO\",\n  \"cargaHoraria\": 80,\n  \"focoPrincipal\": \"Dados\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trilhas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trilhas"]
+            }
+          }
+        },
+        {
+          "name": "Atualizar trilha",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Python Avançado para Data Science\",\n  \"descricao\": \"Domine Python para análise avançada de dados\",\n  \"nivel\": \"AVANCADO\",\n  \"cargaHoraria\": 120,\n  \"focoPrincipal\": \"Dados\"\n}"
+            },
+            "url": {
+              "raw": "{{base_url}}/api/trilhas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trilhas", "1"]
+            }
+          }
+        },
+        {
+          "name": "Deletar trilha",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/trilhas/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "trilhas", "1"]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:5000",
+      "type": "string"
+    }
+  ]
+}
