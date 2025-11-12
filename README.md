@@ -7,15 +7,15 @@
 
 ## 📑 Documentação do Projeto
 
-> 👉 **[Veja o INDEX.md](INDEX.md)** para navegação completa de todos os documentos
+> 👉 **[Veja o docs/INDEX.md](docs/INDEX.md)** para navegação completa de todos os documentos
 
-- 📖 **[QUICKSTART.md](QUICKSTART.md)** - Guia rápido de execução (5 passos)
-- ⚠️ **[IMPORTANTE.md](IMPORTANTE.md)** - Leia antes de executar!
-- ✅ **[CHECKLIST.md](CHECKLIST.md)** - Verificação de requisitos
-- 🧪 **[TESTES.md](TESTES.md)** - Exemplos de testes (cURL, PowerShell)
-- 📂 **[ESTRUTURA.md](ESTRUTURA.md)** - Visão completa da arquitetura
-- 📊 **[RESUMO_EXECUTIVO.md](RESUMO_EXECUTIVO.md)** - Resumo do projeto
-- 👥 **[INTEGRANTES.md](INTEGRANTES.md)** - Informações da equipe
+- 📖 **[docs/QUICKSTART.md](docs/QUICKSTART.md)** - Guia rápido de execução (5 passos)
+- ⚠️ **[docs/IMPORTANTE.md](docs/IMPORTANTE.md)** - Leia antes de executar!
+- ✅ **[docs/CHECKLIST.md](docs/CHECKLIST.md)** - Verificação de requisitos
+- 🧪 **[docs/TESTES.md](docs/TESTES.md)** - Exemplos de testes (cURL, PowerShell)
+- 📂 **[docs/ESTRUTURA.md](docs/ESTRUTURA.md)** - Visão completa da arquitetura
+- 📊 **[docs/RESUMO_EXECUTIVO.md](docs/RESUMO_EXECUTIVO.md)** - Resumo do projeto
+- 👥 **[docs/INTEGRANTES.md](docs/INTEGRANTES.md)** - Informações da equipe
 
 ---
 
@@ -58,43 +58,61 @@ O projeto segue a **arquitetura em camadas**:
 
 ```
 gs-soa/
-├── Controllers/          # Endpoints da API
-│   ├── UsuariosController.cs
-│   └── TrilhasController.cs
-├── Services/             # Lógica de negócio
-│   ├── IUsuarioService.cs
-│   ├── UsuarioService.cs
-│   ├── ITrilhaService.cs
-│   └── TrilhaService.cs
-├── Repositories/         # Acesso aos dados
-│   ├── IUsuarioRepository.cs
-│   ├── UsuarioRepository.cs
-│   ├── ITrilhaRepository.cs
-│   └── TrilhaRepository.cs
-├── Models/               # Entidades do domínio
-│   ├── Usuario.cs
-│   ├── Trilha.cs
-│   ├── Competencia.cs
-│   ├── TrilhaCompetencia.cs
-│   └── Matricula.cs
-├── DTOs/                 # Data Transfer Objects
-│   ├── UsuarioCreateDto.cs
-│   ├── UsuarioUpdateDto.cs
-│   ├── UsuarioResponseDto.cs
-│   ├── TrilhaCreateDto.cs
-│   ├── TrilhaUpdateDto.cs
-│   └── TrilhaResponseDto.cs
-├── Data/                 # Contexto do banco
-│   └── AppDbContext.cs
-├── Exceptions/           # Exceções customizadas
-│   ├── ResourceNotFoundException.cs
-│   └── BusinessException.cs
-├── Middleware/           # Middlewares
-│   └── ExceptionHandlingMiddleware.cs
-├── Migrations/           # Scripts SQL
+├── src/                      # Código-fonte da aplicação
+│   ├── Controllers/          # Endpoints da API
+│   │   ├── UsuariosController.cs
+│   │   └── TrilhasController.cs
+│   ├── Services/             # Lógica de negócio
+│   │   ├── IUsuarioService.cs
+│   │   ├── UsuarioService.cs
+│   │   ├── ITrilhaService.cs
+│   │   └── TrilhaService.cs
+│   ├── Repositories/         # Acesso aos dados
+│   │   ├── IUsuarioRepository.cs
+│   │   ├── UsuarioRepository.cs
+│   │   ├── ITrilhaRepository.cs
+│   │   └── TrilhaRepository.cs
+│   ├── Models/               # Entidades do domínio
+│   │   ├── Usuario.cs
+│   │   ├── Trilha.cs
+│   │   ├── Competencia.cs
+│   │   ├── TrilhaCompetencia.cs
+│   │   └── Matricula.cs
+│   ├── DTOs/                 # Data Transfer Objects
+│   │   ├── UsuarioCreateDto.cs
+│   │   ├── UsuarioUpdateDto.cs
+│   │   ├── UsuarioResponseDto.cs
+│   │   ├── TrilhaCreateDto.cs
+│   │   ├── TrilhaUpdateDto.cs
+│   │   └── TrilhaResponseDto.cs
+│   ├── Data/                 # Contexto do banco
+│   │   └── AppDbContext.cs
+│   ├── Exceptions/           # Exceções customizadas
+│   │   ├── ResourceNotFoundException.cs
+│   │   └── BusinessException.cs
+│   ├── Middleware/           # Middlewares
+│   │   └── ExceptionHandlingMiddleware.cs
+│   └── Program.cs            # Configuração da aplicação
+├── docs/                     # Documentação
+│   ├── INDEX.md              # Índice da documentação
+│   ├── QUICKSTART.md
+│   ├── IMPORTANTE.md
+│   ├── CHECKLIST.md
+│   ├── TESTES.md
+│   ├── ESTRUTURA.md
+│   ├── RESUMO_EXECUTIVO.md
+│   └── INTEGRANTES.md
+├── Migrations/               # Scripts SQL
 │   ├── V1__Initial_Schema.sql
 │   └── V2__Seed_Data.sql
-└── Program.cs            # Configuração da aplicação
+├── Properties/
+│   └── launchSettings.json
+├── .gitignore
+├── appsettings.json
+├── appsettings.Development.json
+├── gs-soa.csproj
+├── postman_collection.json
+└── README.md
 ```
 
 ---

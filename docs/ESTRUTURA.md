@@ -7,58 +7,66 @@ gs-soa/
 ├── 📄 appsettings.json                    # Configurações da aplicação (connection string)
 ├── 📄 appsettings.Development.json        # Configurações de desenvolvimento
 ├── 📄 gs-soa.csproj                       # Arquivo do projeto .NET
-├── 📄 Program.cs                          # Ponto de entrada da aplicação
-│
-├── 📄 README.md                           # Documentação completa do projeto ⭐
-├── 📄 INTEGRANTES.md                      # Informações da equipe
-├── 📄 QUICKSTART.md                       # Guia rápido de execução
-├── 📄 CHECKLIST.md                        # Lista de verificação de requisitos
-├── 📄 TESTES.md                           # Exemplos de testes (cURL, PowerShell)
+├── 📄 README.md                           # Documentação principal ⭐
 ├── 📄 postman_collection.json             # Coleção Postman para testes
 │
-├── 📁 Properties/
+├── � Properties/
 │   └── launchSettings.json                # Configurações de execução
 │
-├── 📁 Controllers/                        # 🎯 Camada de Controle (Endpoints REST)
-│   ├── UsuariosController.cs              # CRUD de Usuários
-│   └── TrilhasController.cs               # CRUD de Trilhas
+├── � src/                                # 📦 CÓDIGO-FONTE DA APLICAÇÃO
+│   │
+│   ├── 📄 Program.cs                      # Ponto de entrada da aplicação
+│   │
+│   ├── 📁 Controllers/                    # 🎯 Camada de Controle (Endpoints REST)
+│   │   ├── UsuariosController.cs          # CRUD de Usuários
+│   │   └── TrilhasController.cs           # CRUD de Trilhas
+│   │
+│   ├── 📁 Services/                       # 💼 Camada de Serviço (Lógica de Negócio)
+│   │   ├── IUsuarioService.cs             # Interface do serviço de usuários
+│   │   ├── UsuarioService.cs              # Implementação do serviço de usuários
+│   │   ├── ITrilhaService.cs              # Interface do serviço de trilhas
+│   │   └── TrilhaService.cs               # Implementação do serviço de trilhas
+│   │
+│   ├── 📁 Repositories/                   # 🗄️ Camada de Repositório (Acesso a Dados)
+│   │   ├── IUsuarioRepository.cs          # Interface do repositório de usuários
+│   │   ├── UsuarioRepository.cs           # Implementação do repositório de usuários
+│   │   ├── ITrilhaRepository.cs           # Interface do repositório de trilhas
+│   │   └── TrilhaRepository.cs            # Implementação do repositório de trilhas
+│   │
+│   ├── 📁 Models/                         # 📊 Entidades do Domínio
+│   │   ├── Usuario.cs                     # Entidade Usuário
+│   │   ├── Trilha.cs                      # Entidade Trilha
+│   │   ├── Competencia.cs                 # Entidade Competência
+│   │   ├── TrilhaCompetencia.cs           # Relação N:N Trilha-Competência
+│   │   └── Matricula.cs                   # Entidade Matrícula
+│   │
+│   ├── 📁 DTOs/                           # 📦 Data Transfer Objects
+│   │   ├── UsuarioCreateDto.cs            # DTO para criação de usuário
+│   │   ├── UsuarioUpdateDto.cs            # DTO para atualização de usuário
+│   │   ├── UsuarioResponseDto.cs          # DTO de resposta de usuário
+│   │   ├── TrilhaCreateDto.cs             # DTO para criação de trilha
+│   │   ├── TrilhaUpdateDto.cs             # DTO para atualização de trilha
+│   │   └── TrilhaResponseDto.cs           # DTO de resposta de trilha
+│   │
+│   ├── 📁 Data/                           # 🔗 Contexto do Banco de Dados
+│   │   └── AppDbContext.cs                # DbContext do Entity Framework Core
+│   │
+│   ├── 📁 Exceptions/                     # ⚠️ Exceções Customizadas
+│   │   ├── ResourceNotFoundException.cs   # Exceção para recurso não encontrado (404)
+│   │   └── BusinessException.cs           # Exceção para regras de negócio (422)
+│   │
+│   └── 📁 Middleware/                     # 🛡️ Middlewares
+│       └── ExceptionHandlingMiddleware.cs # Middleware de tratamento de exceções
 │
-├── 📁 Services/                           # 💼 Camada de Serviço (Lógica de Negócio)
-│   ├── IUsuarioService.cs                 # Interface do serviço de usuários
-│   ├── UsuarioService.cs                  # Implementação do serviço de usuários
-│   ├── ITrilhaService.cs                  # Interface do serviço de trilhas
-│   └── TrilhaService.cs                   # Implementação do serviço de trilhas
-│
-├── 📁 Repositories/                       # 🗄️ Camada de Repositório (Acesso a Dados)
-│   ├── IUsuarioRepository.cs              # Interface do repositório de usuários
-│   ├── UsuarioRepository.cs               # Implementação do repositório de usuários
-│   ├── ITrilhaRepository.cs               # Interface do repositório de trilhas
-│   └── TrilhaRepository.cs                # Implementação do repositório de trilhas
-│
-├── 📁 Models/                             # 📊 Entidades do Domínio
-│   ├── Usuario.cs                         # Entidade Usuário
-│   ├── Trilha.cs                          # Entidade Trilha
-│   ├── Competencia.cs                     # Entidade Competência
-│   ├── TrilhaCompetencia.cs               # Relação N:N Trilha-Competência
-│   └── Matricula.cs                       # Entidade Matrícula
-│
-├── 📁 DTOs/                               # 📦 Data Transfer Objects
-│   ├── UsuarioCreateDto.cs                # DTO para criação de usuário
-│   ├── UsuarioUpdateDto.cs                # DTO para atualização de usuário
-│   ├── UsuarioResponseDto.cs              # DTO de resposta de usuário
-│   ├── TrilhaCreateDto.cs                 # DTO para criação de trilha
-│   ├── TrilhaUpdateDto.cs                 # DTO para atualização de trilha
-│   └── TrilhaResponseDto.cs               # DTO de resposta de trilha
-│
-├── 📁 Data/                               # 🔗 Contexto do Banco de Dados
-│   └── AppDbContext.cs                    # DbContext do Entity Framework Core
-│
-├── 📁 Exceptions/                         # ⚠️ Exceções Customizadas
-│   ├── ResourceNotFoundException.cs       # Exceção para recurso não encontrado (404)
-│   └── BusinessException.cs               # Exceção para regras de negócio (422)
-│
-├── 📁 Middleware/                         # 🛡️ Middlewares
-│   └── ExceptionHandlingMiddleware.cs     # Middleware de tratamento de exceções
+├── 📁 docs/                               # 📚 DOCUMENTAÇÃO DO PROJETO
+│   ├── INDEX.md                           # Índice de navegação
+│   ├── QUICKSTART.md                      # Guia rápido (5 passos)
+│   ├── IMPORTANTE.md                      # Notas importantes
+│   ├── CHECKLIST.md                       # Verificação de requisitos
+│   ├── TESTES.md                          # Exemplos de testes
+│   ├── ESTRUTURA.md                       # Este arquivo (Arquitetura)
+│   ├── RESUMO_EXECUTIVO.md                # Resumo do projeto
+│   └── INTEGRANTES.md                     # Informações da equipe
 │
 └── 📁 Migrations/                         # 🗃️ Scripts SQL de Migração
     ├── V1__Initial_Schema.sql             # Criação de tabelas
