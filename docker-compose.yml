@@ -1,0 +1,131 @@
+version: '3.8'
+
+services:
+  # ========================================
+  # Aplicação .NET
+  # ========================================
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: gs-profissoes-app
+    restart: unless-stopped
+    
+    # Porta exposta (host:container)
+    ports:
+      - "5000:5000"
+    
+    # Variáveis de ambiente
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:5000
+      # Configuração do banco de dados Oracle
+      - ConnectionStrings__DefaultConnection=${DB_CONNECTION_STRING}
+      
+    # Security hardening
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    cap_add:
+      - NET_BIND_SERVICE
+    read_only: true
+    
+    # Volumes temporários (read-only root filesystem)
+    tmpfs:
+      - /tmp
+      - /app/tmp
+    
+    # Limites de recursos
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s
+    
+    # Rede personalizada
+    networks:
+      - app-network
+    
+    # Dependências (descomente se usar Oracle local)
+    # depends_on:
+    #   oracle:
+    #     condition: service_healthy
+    
+    # Logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+
+  # ========================================
+  # Oracle Database (Opcional - para desenvolvimento)
+  # ========================================
+  # Descomente se precisar de um banco Oracle local
+  # oracle:
+  #   image: container-registry.oracle.com/database/express:21.3.0-xe
+  #   container_name: gs-profissoes-oracle
+  #   restart: unless-stopped
+  #   
+  #   ports:
+  #     - "1521:1521"
+  #     - "5500:5500"
+  #   
+  #   environment:
+  #     - ORACLE_PWD=${ORACLE_PASSWORD:-OraclePassword123}
+  #     - ORACLE_CHARACTERSET=AL32UTF8
+  #   
+  #   volumes:
+  #     - oracle-data:/opt/oracle/oradata
+  #     - ./Migrations:/docker-entrypoint-initdb.d/startup:ro
+  #   
+  #   security_opt:
+  #     - no-new-privileges:true
+  #   
+  #   healthcheck:
+  #     test: ["CMD", "healthcheck.sh"]
+  #     interval: 30s
+  #     timeout: 10s
+  #     retries: 5
+  #     start_period: 60s
+  #   
+  #   networks:
+  #     - app-network
+  #   
+  #   deploy:
+  #     resources:
+  #       limits:
+  #         cpus: '2.0'
+  #         memory: 2G
+  #       reservations:
+  #         cpus: '1.0'
+  #         memory: 1G
+
+# ========================================
+# Redes
+# ========================================
+networks:
+  app-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+# ========================================
+# Volumes
+# ========================================
+# volumes:
+#   oracle-data:
+#     driver: local
