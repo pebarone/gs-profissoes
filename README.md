@@ -2,19 +2,21 @@
 
 API RESTful com versionamento para plataforma de capacitação profissional voltada ao futuro do trabalho 2030+.
 
-## 🎯 Descrição
+## Descrição
 
 Este projeto implementa uma plataforma completa de upskilling e reskilling profissional com funcionalidades de gerenciamento de usuários, trilhas de aprendizagem, matrículas e estatísticas. A API utiliza versionamento para permitir evolução gradual e compatibilidade.
 
-## 🚀 Tecnologias
+## Tecnologias
 
 - **ASP.NET Core 8.0** - Framework web moderno e performático
 - **Entity Framework Core 8.0** - ORM para acesso a dados
 - **Oracle Database** - Banco de dados relacional enterprise
 - **Swagger/OpenAPI** - Documentação interativa da API
 - **Microsoft.AspNetCore.Mvc.Versioning** - Versionamento de API
+- **Docker** - Containerização da aplicação
+- **Docker Compose** - Orquestração de containers
 
-## 📂 Estrutura do Projeto
+## Estrutura do Projeto
 
 ```
 gs-profissoes/
@@ -42,10 +44,88 @@ gs-profissoes/
 │       ├── api.js         # Chamadas à API
 │       ├── components.js  # Componentes UI
 │       └── app.js         # Lógica da aplicação
+├── Dockerfile             # Imagem Docker
+├── docker-compose.yml     # Orquestração de containers
+├── .dockerignore          # Arquivos excluídos do build
+├── .env.example           # Template de variáveis de ambiente
 └── postman_collection.json
 ```
 
-## Configuração
+## Configuração com Docker
+
+### Pré-requisitos
+
+- Docker Desktop instalado
+- Docker Compose (incluído no Docker Desktop)
+
+### Executar com Docker
+
+1. Copiar arquivo de ambiente:
+```bash
+copy .env.example .env
+```
+
+2. Editar `.env` com credenciais do Oracle:
+```env
+DB_CONNECTION_STRING=User Id=seu_usuario;Password=sua_senha;Data Source=oracle:1521/XEPDB1
+```
+
+3. Build e iniciar aplicação:
+```bash
+docker-compose up -d --build
+```
+
+4. Verificar logs:
+```bash
+docker-compose logs -f app
+```
+
+5. Acessar aplicação:
+- **Frontend**: http://localhost:5000
+- **API v1**: http://localhost:5000/api/v1
+- **API v2**: http://localhost:5000/api/v2
+- **Swagger**: http://localhost:5000/api-docs
+
+6. Parar aplicação:
+```bash
+docker-compose down
+```
+
+### Executar apenas com Docker
+
+```bash
+# Build da imagem
+docker build -t gs-profissoes .
+
+# Executar container
+docker run -p 5000:5000 gs-profissoes
+
+# Executar em background
+docker run -d -p 5000:5000 --name gs-profissoes-app gs-profissoes
+
+# Ver logs
+docker logs -f gs-profissoes-app
+
+# Parar e remover
+docker stop gs-profissoes-app
+docker rm gs-profissoes-app
+```
+
+### Segurança do Container
+
+O Dockerfile implementa as seguintes práticas de segurança:
+
+- Multi-stage build para reduzir tamanho da imagem
+- Imagens base oficiais Microsoft
+- Usuário não-root (appuser) para execução
+- Porta não-privilegiada (5000)
+- Capabilities mínimas no docker-compose
+- Read-only filesystem com volumes temporários
+- Limites de recursos (CPU e memória)
+- Health check configurado
+- Logs com rotação automática
+
+## Configuração Manual
 
 ### Pré-requisitos
 
@@ -90,7 +170,7 @@ A aplicação estará disponível em:
 - **API v2**: http://localhost:5000/api/v2
 - **Swagger**: http://localhost:5000/api-docs
 
-## 📋 Versionamento de API
+## Versionamento de API
 
 A API utiliza versionamento de URL para manter compatibilidade e permitir evolução gradual:
 
@@ -104,7 +184,7 @@ A API utiliza versionamento de URL para manter compatibilidade e permitir evolu�
 - Documentação separada no Swagger para cada versão
 - Endpoints v1 mantidos para compatibilidade
 
-## 📍 Endpoints da API
+## Endpoints da API
 
 ### API v1 - Usuários
 
@@ -149,7 +229,7 @@ A API utiliza versionamento de URL para manter compatibilidade e permitir evolu�
 }
 ```
 
-### API v2 - Matrículas 🆕
+### API v2 - Matrículas
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
@@ -208,7 +288,7 @@ A API utiliza versionamento de URL para manter compatibilidade e permitir evolu�
 - `CONCLUIDA`: Trilha finalizada com sucesso
 - `CANCELADA`: Matrícula cancelada pelo usuário
 
-### API v2 - Estatísticas 🆕
+### API v2 - Estatísticas
 
 | Método | Endpoint | Descrição |
 |--------|----------|-----------|
@@ -237,7 +317,7 @@ A API utiliza versionamento de URL para manter compatibilidade e permitir evolu�
 }
 ```
 
-## 🎨 Frontend
+## Frontend
 
 A aplicação inclui um frontend SPA moderno desenvolvido com HTML, CSS e JavaScript vanilla.
 
@@ -268,7 +348,7 @@ A aplicação inclui um frontend SPA moderno desenvolvido com HTML, CSS e JavaSc
 - `static/js/components.js` - Componentes UI reutilizáveis
 - `static/js/app.js` - Lógica da aplicação e gerenciamento de estado
 
-## 🔧 Tratamento de Erros
+## Tratamento de Erros
 
 A API utiliza middleware customizado (`ExceptionHandlingMiddleware`) para tratamento global de exceções, retornando respostas padronizadas:
 
@@ -285,7 +365,7 @@ A API utiliza middleware customizado (`ExceptionHandlingMiddleware`) para tratam
 - `ResourceNotFoundException`: Recurso não encontrado (404)
 - `BusinessException`: Violação de regras de negócio (422)
 
-## ✅ Validações
+## Validações
 
 ### Usuário
 
@@ -313,7 +393,7 @@ A API utiliza middleware customizado (`ExceptionHandlingMiddleware`) para tratam
   - Matrícula concluída não pode ser atualizada
   - Matrícula cancelada não pode ser concluída
 
-## 🗄️ Banco de Dados
+## Banco de Dados
 
 ### Schema Oracle
 
@@ -338,9 +418,9 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 - `DATA_CANCELAMENTO`: Data de cancelamento
 - `AVALIACAO`: Avaliação de 1 a 5 estrelas
 
-## 🎯 Requisitos Implementados
+## Requisitos Implementados
 
-### 1. Boas Práticas REST ✅
+### 1. Boas Práticas REST
 
 - **Status codes adequados**: 200, 201, 204, 400, 404, 422, 500
 - **Verbos HTTP corretos**: GET (leitura), POST (criação), PUT (atualização completa), PATCH (atualização parcial), DELETE (remoção)
@@ -348,7 +428,7 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 - **Validação de entrada** com DataAnnotations
 - **Tratamento de erros** centralizado
 
-### 2. Versionamento da API ✅
+### 2. Versionamento da API
 
 - **v1**: Endpoints de Usuários e Trilhas (`/api/v1/`)
 - **v2**: Endpoints de Matrículas e Estatísticas (`/api/v2/`)
@@ -358,7 +438,7 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 - **Retrocompatibilidade** com v1 mantida
 - **README atualizado** com documentação completa
 
-### 3. Integração e Persistência ✅
+### 3. Integração e Persistência
 
 - **Oracle Database** como banco de dados relacional
 - **Entity Framework Core** com DbContext configurado
@@ -367,7 +447,18 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 - **Service Layer** com lógica de negócio
 - **Relacionamentos** corretamente mapeados (1:N, N:N)
 
-## 📦 Dependências NuGet
+### 4. Containerização e Deploy
+
+- **Dockerfile** com multi-stage build
+- **docker-compose.yml** para orquestração
+- **Imagem otimizada** com usuário não-root
+- **Práticas de segurança** implementadas
+- **Health checks** configurados
+- **Variáveis de ambiente** para configuração
+- **Logs estruturados** com rotação
+- **Documentação completa** de uso
+
+## Dependências NuGet
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="5.1.0" />
@@ -379,7 +470,7 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
 ```
 
-## 🚀 Funcionalidades Principais
+## Funcionalidades Principais
 
 ### Matrículas (API v2)
 - Inscrever usuário em trilha
@@ -403,28 +494,19 @@ Todas as tabelas utilizam o prefixo `TRILHAS_` e suportam:
 - Visualização de taxa de conclusão
 - Stars rating para avaliações
 
-## 👨‍💻 Autor
-
-Desenvolvido para **Global Solution 2025 - FIAP**
-Tema: O Futuro do Trabalho - Plataforma de Upskilling/Reskilling
-
-## 📄 Licença
-
-Este projeto é parte de um trabalho acadêmico.
-
 ## Testes
 
-Utilize a collection do Postman incluída no projeto:
+Utilize a collection do Postman incluída no projeto para testar todos os endpoints disponíveis.
 
 ```bash
+# Importar no Postman
 postman_collection.json
 ```
 
-Importe no Postman para testar todos os endpoints disponíveis.
+## Autor
 
-## Autores
-
-Global Solution 2025
+Desenvolvido para Global Solution 2025 - FIAP  
+Tema: O Futuro do Trabalho - Plataforma de Upskilling/Reskilling
 
 ## Licença
 
