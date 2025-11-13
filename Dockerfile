@@ -44,6 +44,9 @@ COPY --from=publish /app/publish .
 # Copiar diretório static
 COPY --from=build /src/static ./static
 
+# Copiar postman collection
+COPY --from=build /src/postman_collection.json ./postman_collection.json
+
 # Configurar variáveis de ambiente
 ENV ASPNETCORE_ENVIRONMENT=Production \
     ASPNETCORE_URLS=http://+:5000 \
