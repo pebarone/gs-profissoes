@@ -1,4 +1,4 @@
-# GS SOA - API Plataforma de Upskilling/Reskilling
+# GS - API Plataforma de Upskilling/Reskilling
 
 API RESTful com versionamento para plataforma de capacitação profissional voltada ao futuro do trabalho 2030+.
 
@@ -10,7 +10,7 @@ O projeto conta com um deploy de imagem docker no render https://gs-profissoes.o
 
 Para acessar a documentação Swagger, utilize a rota https://gs-profissoes.onrender.com/api-docs
 
-## Diagrama de Classes
+<img width="1903" height="952" alt="image" src="https://github.com/user-attachments/assets/c28984d7-7a8e-4cc5-a190-785aaa4adf0f" />
 
 
 ## Tecnologias
